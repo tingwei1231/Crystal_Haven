@@ -1,0 +1,6 @@
+[
+  {"id":"DEMO-CR-001","slug":"sample-quartz","name":"白水晶簇","category":"quartz","description":"透亮晶面與交錯的稜線，呈現原礦生長的方向。此為原創繪製示意，並非店內實物。","priceTwd":null,"status":"available","featured":true,"isSample":true,"images":["images/quartz.webp"],"sizeText":null,"weightGrams":null,"updatedAt":"2026-11-04"},
+  {"id":"DEMO-CR-002","slug":"sample-smoky","name":"茶晶原礦","category":"smoky","description":"深淺交疊的煙茶色，映照礦物切面的光影。此為原創繪製示意，並非店內實物。","priceTwd":null,"status":"reserved","featured":true,"isSample":true,"images":["images/smoky.webp"],"sizeText":null,"weightGrams":null,"updatedAt":"2026-11-04"},
+  {"id":"DEMO-CR-003","slug":"sample-green","name":"綠色礦石","category":"mineral","description":"以深綠色塊與結晶輪廓呈現礦石質感。品種、產地與實物特徵待店家提供。","priceTwd":null,"status":"sold","featured":true,"isSample":true,"images":["images/green.webp"],"sizeText":null,"weightGrams":null,"updatedAt":"2026-11-04"},
+  {"id":"DEMO-CR-004","slug":"sample-hidden","name":"隱藏測試樣本","category":"quartz","description":"不公開樣本","priceTwd":null,"status":"hidden","featured":false,"isSample":true,"images":[],"sizeText":null,"weightGrams":null,"updatedAt":"2026-11-04"}
+]

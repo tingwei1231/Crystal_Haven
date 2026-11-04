@@ -1,0 +1,3 @@
+[
+  {"id":"demo-name-seal","name":"姓名章 Demo","description":"以姓名章演示材質、尺寸與印文需求的整理方式。示意服務，尚未確認店家實際承接範圍。","availableMaterials":["木質（示意）","石材（示意）"],"availableSizes":["方形尺寸待確認","圓形尺寸待確認"],"availableFonts":["楷體（示意）","篆體（示意）"],"startingPriceTwd":null,"turnaroundNote":"交期與可製作性需由店家確認，Demo 不提供價格或工期承諾。","images":["images/seal.webp"],"enabled":true,"isSample":true}
+]
