@@ -20,19 +20,32 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - run: npm ci
-      - run: npm run typecheck
-      - run: npm run lint
-      - run: npm test
-      - uses: actions/configure-pages@v5
+      - name: Show toolchain versions
+        run: |
+          node --version
+          npm --version
+      - name: Install from lockfile
+        run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Lint
+        run: npm run lint
+      - name: Unit tests
+        run: npm test
+      - name: Read GitHub Pages configuration
+        # One-time setup: Settings > Pages > Source > GitHub Actions.
+        # Automatic enablement requires a separate privileged token; keep it manual.
+        uses: actions/configure-pages@v5
         id: pages
       - name: Build with Pages path and canonical URL
         run: npm run build
         env:
           VITE_BASE_PATH: ${{ steps.pages.outputs.base_path }}/
           VITE_SITE_URL: ${{ steps.pages.outputs.base_url }}/
-      - run: npx playwright install --with-deps chromium
-      - run: npm run test:e2e
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Browser tests on production build
+        run: npm run test:e2e
         env:
           PLAYWRIGHT_BASE_PATH: ${{ steps.pages.outputs.base_path }}/
       - uses: actions/upload-pages-artifact@v3

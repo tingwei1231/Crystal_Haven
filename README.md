@@ -13,6 +13,18 @@ npm run dev
 
 開發站預設 `http://127.0.0.1:5173/`。正式輸出預覽：
 
+Windows PowerShell 若顯示「已停用指令碼執行／無法載入 npm.ps1」，請使用 `npm.cmd`。這不需要修改系統的執行原則：
+
+```powershell
+node --version
+npm.cmd ci
+npm.cmd run dev
+```
+
+執行 `ci` 前，先在本專案的 dev／preview 終端按 Ctrl+C 關閉伺服器。Windows 上執行中的 Vite 會占用 Rollup 原生模組；此時重新安裝會出現 `EPERM unlink ...rollup.win32-x64-msvc.node`。安裝中斷後，`vite is not recognized` 通常表示套件尚未完整恢復，請關閉伺服器再重新執行 `npm.cmd ci`。不要一律終止電腦上的所有 Node 程序。
+
+本專案使用 Node.js 24+（`.nvmrc`／`.node-version` 指定 24）；若版本較舊，先切換 Node 再安裝。以下 `npm` 指令在受限制的 PowerShell 中均可改用 `npm.cmd`。
+
 ```sh
 npm run typecheck
 npm run lint
@@ -82,6 +94,10 @@ Demo 可部署供檢視，預設 `demoMode: true`、全站提示及 `noindex`。
 3. 推送 `main` 或手動執行 **Validate and deploy GitHub Pages** workflow。它依序安裝、typecheck、lint、unit test、build、瀏覽器測試及部署。
 4. workflow 透過 `configure-pages` 取得 URL 與子路徑，自動帶入 `VITE_BASE_PATH`、`VITE_SITE_URL`，不需要手寫 repo 名稱。自訂網域先在 Pages 設定，build 同樣使用 Pages 回傳的 URL。
 5. 開啟 Actions 部署結果的網址，檢查 `/#/engraving` 與 `/#/crystals/sample-quartz`（正式資料請換 slug）、重新整理、圖片及手機選單。
+
+若 `Read GitHub Pages configuration` 出現 `Get Pages site failed`／`HttpError: Not Found`，先開啟 repository 的 Settings → Pages，把 Source 設成 GitHub Actions，再到失敗的 Actions run 按 Re-run failed jobs；這項設定不需重新提交程式。已有本專案 workflow 時，不需要另建 GitHub 建議的模板。
+
+目前 repository 的 Pages 設定入口為 https://github.com/tingwei1231/Crystal_Haven/settings/pages 。如果頁面顯示須升級方案，請先核對私人 repository 的 Pages 方案資格，不能靠改 YAML 繞過。不要只加入 `enablement: true`：configure-pages v5 官方定義要求另提供具有適當權限的 token；此專案採管理者手動啟用一次、workflow 使用內建 GITHUB_TOKEN，無須增加 PAT。
 
 本機模擬子路徑（PowerShell）：
 

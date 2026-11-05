@@ -1,5 +1,17 @@
 # 驗證紀錄
 
+## 2026-11-05 安裝／啟動問題追查
+
+已讀取使用者本機的 npm 失敗紀錄（`2026-11-04T16_35_50_039Z-debug-0.log`）：`npm ci` 在移除被舊 Vite 占用的 `@esbuild/win32-x64/esbuild.exe` 時發生 EPERM。本次重現另有 Rollup 原生模組被鎖定；關閉本專案先前啟動的 dev／preview 後，以既有快取完成乾淨安裝。未變更 package.json 或 lockfile，沒有證據顯示這次本機錯誤由 lockfile 造成。
+
+PowerShell 的 `npm` 亦重現 `npm.ps1` 被 Restricted 執行原則阻擋，README 已提供 `npm.cmd` 用法，未更改系統執行原則。
+
+重新安裝後：dev 啟動且 HTTP 200、build／typecheck／lint 通過、單元測試 9／9、瀏覽器測試 18／18。Playwright preview 改直接以目前 Node 啟動 Vite，並實測正常退出；本專案伺服器已停止，避免再次阻擋使用者安裝。
+
+使用者後續提供 GitHub Actions 錯誤：configure-pages v5 的 Get Pages site 回傳 404；該次失敗發生在讀取 Pages 設定，尚未進入 Vite build。已核對官方文件與 action v5 原始碼，應先由 repository 管理者在 Settings → Pages 選擇 GitHub Actions，再重跑失敗工作。現有 build job 已有 pages:read，deploy job 已有 pages:write／id-token:write。未擅自新增 PAT 或宣稱遠端設定已改好。README 已補上設定入口、404 排錯與 enablement 的權限限制。
+
+---
+
 日期：2026-11-05，Windows／Node.js 24.14.0／本機 Microsoft Edge。
 
 | 檢查 | 結果 |
